@@ -4,10 +4,12 @@ import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
 import React from "react";
 import ListingClient from "./ListingClient";
+import getReservations from "@/app/actions/getReservations";
 
 async function ListingPage({ params }: { params: { listingId?: string } }) {
   const listing = await getListById(params);
   const currentUser = await getCurrentUser();
+  const reservations = await getReservations(params);
 
   if (!listing) {
     return (
@@ -18,7 +20,11 @@ async function ListingPage({ params }: { params: { listingId?: string } }) {
   }
   return (
     <ClientOnly>
-      <ListingClient listing={listing} currentUser={currentUser} />
+      <ListingClient
+        listing={listing}
+        currentUser={currentUser}
+        reservations={reservations}
+      />
     </ClientOnly>
   );
 }
