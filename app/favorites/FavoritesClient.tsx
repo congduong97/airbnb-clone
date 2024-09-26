@@ -8,7 +8,7 @@ function FavoritesClient({
   currentUser,
 }: {
   listings: Listing[];
-  currentUser: User;
+  currentUser: User | null;
 }) {
   return (
     <Container>
