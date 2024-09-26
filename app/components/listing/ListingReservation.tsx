@@ -11,7 +11,7 @@ interface ListingReservationProps {
   onChangeDate: (value: Range) => void;
   onSubmit: () => void;
   disabledDates?: Date[];
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 function ListingReservation({

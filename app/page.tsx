@@ -5,14 +5,20 @@ import Container from "./components/Container";
 import EmptyState from "./components/EmptyState";
 import ListingCard from "./components/listing/ListingCard";
 
-export default async function Home() {
-  const listings = await getListings();
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: {
+    userId: string;
+  };
+}) {
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
   const isEmpty = !listings?.length;
   if (isEmpty)
     return (
       <ClientOnly>
-        <EmptyState />
+        <EmptyState showReset />
       </ClientOnly>
     );
   return (

@@ -64,15 +64,39 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                   <MenuItem
                     onClick={() => {
                       router.push("/trips");
+                      setIsOpen(false);
                     }}
                     label="My trips"
                   />
                   <hr />
                   <MenuItem
                     onClick={() => {
-                      signOut().catch((e) => {
-                        console.log("logout error", e);
-                      });
+                      router.push("/reservations");
+                      setIsOpen(false);
+                    }}
+                    label="My reservations"
+                  />
+                  <hr />
+                  <MenuItem
+                    onClick={() => {
+                      router.push("/favorites");
+                      setIsOpen(false);
+                    }}
+                    label="My favorites"
+                  />
+                  <hr />
+                  <MenuItem
+                    onClick={() => {
+                      router.push("/properties");
+                      setIsOpen(false);
+                    }}
+                    label="My properties"
+                  />
+                  <hr />
+                  <MenuItem
+                    onClick={() => {
+                      signOut().catch((e) => {});
+                      setIsOpen(false);
                     }}
                     label="Logout"
                   />

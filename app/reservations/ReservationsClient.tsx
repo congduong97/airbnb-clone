@@ -1,17 +1,15 @@
 "use client";
-
-import { Listing, Reservation, User } from "@prisma/client";
-import Container from "../components/Container";
-import Heading from "../components/Heading";
+import { User } from "@prisma/client";
+import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
-import axios from "axios";
 import toast from "react-hot-toast";
+import Container from "../components/Container";
+import Heading from "../components/Heading";
 import ListingCard from "../components/listing/ListingCard";
+import { ReservationsSafe } from "../trips/TripClient";
 
-export type ReservationsSafe = Reservation & { listing: Listing };
-
-function TripClient({
+function ReservationsClient({
   reservations,
   currentUser,
 }: {
@@ -19,18 +17,17 @@ function TripClient({
   currentUser: User;
 }) {
   const router = useRouter();
-  const [deleteId, setDeleteId] = useState("");
-
+  const [deleteId, setDeleteId] = useState(" ");
   const onCancel = useCallback((id: string) => {
     setDeleteId(id);
     axios
       .delete(`/api/reservations/${id}`)
       .then(() => {
-        toast.success("Reservations canceled");
+        toast.success("Reservation cancelled");
         router.refresh();
       })
-      .catch((error) => {
-        toast.error(error.response.data.error);
+      .catch(() => {
+        toast.error("Something went wrong.");
       })
       .finally(() => {
         setDeleteId("");
@@ -39,10 +36,7 @@ function TripClient({
 
   return (
     <Container>
-      <Heading
-        title="Trips"
-        subTitle="Where you've been and where you're going"
-      />
+      <Heading title="Reservations" subTitle="Bookings on your properties" />
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {reservations.map((reservation) => {
           return (
@@ -53,7 +47,7 @@ function TripClient({
               actionId={reservation.id}
               onAction={onCancel}
               disabled={deleteId === reservation.id}
-              actionLabel="Cancel reservation"
+              actionLabel="Cancel guest reservation"
               currentUser={currentUser}
             />
           );
@@ -63,4 +57,4 @@ function TripClient({
   );
 }
 
-export default TripClient;
+export default ReservationsClient;

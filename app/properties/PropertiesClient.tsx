@@ -9,13 +9,11 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import ListingCard from "../components/listing/ListingCard";
 
-export type ReservationsSafe = Reservation & { listing: Listing };
-
-function TripClient({
-  reservations,
+function PropertiesClient({
+  listing,
   currentUser,
 }: {
-  reservations: ReservationsSafe[];
+  listing: Listing[];
   currentUser: User;
 }) {
   const router = useRouter();
@@ -24,9 +22,9 @@ function TripClient({
   const onCancel = useCallback((id: string) => {
     setDeleteId(id);
     axios
-      .delete(`/api/reservations/${id}`)
+      .delete(`/api/listings/${id}`)
       .then(() => {
-        toast.success("Reservations canceled");
+        toast.success("Listing deleted");
         router.refresh();
       })
       .catch((error) => {
@@ -44,16 +42,15 @@ function TripClient({
         subTitle="Where you've been and where you're going"
       />
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
-        {reservations.map((reservation) => {
+        {listing.map((listing) => {
           return (
             <ListingCard
-              key={reservation.id}
-              data={reservation.listing}
-              reservation={reservation}
-              actionId={reservation.id}
+              key={listing.id}
+              data={listing}
+              actionId={listing.id}
               onAction={onCancel}
-              disabled={deleteId === reservation.id}
-              actionLabel="Cancel reservation"
+              disabled={deleteId === listing.id}
+              actionLabel="Delete properties"
               currentUser={currentUser}
             />
           );
@@ -63,4 +60,4 @@ function TripClient({
   );
 }
 
-export default TripClient;
+export default PropertiesClient;

@@ -12,7 +12,6 @@ import {
   differenceInDays,
   eachDayOfInterval,
 } from "date-fns";
-import { differenceInDaysWithOptions } from "date-fns/fp";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Range } from "react-date-range";
@@ -71,7 +70,7 @@ function ListingClient({
       .then(() => {
         toast.success("Listing reserved!");
         setDateRange(initialDateRange);
-        router.refresh();
+        router.push("/trips");
       })
       .catch((e) => {
         toast.error("Something went wrong");
