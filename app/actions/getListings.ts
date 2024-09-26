@@ -20,7 +20,7 @@ export default async function getListings(params: {
       category,
     } = params;
 
-    let query: any = {};
+    const query: any = {};
     if (userId) {
       query.userId = userId;
     }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { AiOutlineAim, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 interface CounterProps {
   title: string;

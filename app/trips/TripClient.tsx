@@ -21,21 +21,24 @@ function TripClient({
   const router = useRouter();
   const [deleteId, setDeleteId] = useState("");
 
-  const onCancel = useCallback((id: string) => {
-    setDeleteId(id);
-    axios
-      .delete(`/api/reservations/${id}`)
-      .then(() => {
-        toast.success("Reservations canceled");
-        router.refresh();
-      })
-      .catch((error) => {
-        toast.error(error.response.data.error);
-      })
-      .finally(() => {
-        setDeleteId("");
-      });
-  }, []);
+  const onCancel = useCallback(
+    (id: string) => {
+      setDeleteId(id);
+      axios
+        .delete(`/api/reservations/${id}`)
+        .then(() => {
+          toast.success("Reservations canceled");
+          router.refresh();
+        })
+        .catch((error) => {
+          toast.error(error.response.data.error);
+        })
+        .finally(() => {
+          setDeleteId("");
+        });
+    },
+    [router]
+  );
 
   return (
     <Container>

@@ -1,12 +1,7 @@
 "use-client";
+import { DateRange, Range, RangeKeyDict } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import {
-  DateRange,
-  DateRangePicker,
-  Range,
-  RangeKeyDict,
-} from "react-date-range";
 
 interface CalendarProps {
   value: Range;

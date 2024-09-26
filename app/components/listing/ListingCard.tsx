@@ -48,7 +48,7 @@ function ListingCard({
       if (disabled) return;
       onAction?.(actionId);
     },
-    [disabled, actionId]
+    [disabled, actionId, onAction]
   );
 
   return (

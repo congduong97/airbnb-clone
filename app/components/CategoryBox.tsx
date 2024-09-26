@@ -34,7 +34,7 @@ export default function CategoryBox({
       { skipNull: true }
     );
     router.push(url);
-  }, [data]);
+  }, [data, router]);
 
   return (
     <div

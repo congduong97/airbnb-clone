@@ -1,15 +1,14 @@
 "use client";
-import { AiOutlineMenu } from "react-icons/ai";
-import Avatar from "../Avatar";
-import { useCallback, useEffect, useState } from "react";
-import MenuItem from "./MenuItem";
-import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import useRegisterModal from "@/app/hooks/useRegisterModal";
+import useRentModal from "@/app/hooks/useRentModal";
 import { User } from "@prisma/client";
 import { signOut } from "next-auth/react";
-import { SafeUser } from "@/app/types";
-import useRentModal from "@/app/hooks/useRentModal";
 import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
+import { AiOutlineMenu } from "react-icons/ai";
+import Avatar from "../Avatar";
+import MenuItem from "./MenuItem";
 
 interface UserMenuProps {
   currentUser?: User;
@@ -95,7 +94,7 @@ const UserMenu = ({ currentUser }: UserMenuProps) => {
                   <hr />
                   <MenuItem
                     onClick={() => {
-                      signOut().catch((e) => {});
+                      signOut().catch(() => {});
                       setIsOpen(false);
                     }}
                     label="Logout"

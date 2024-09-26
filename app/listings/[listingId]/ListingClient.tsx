@@ -7,11 +7,7 @@ import { categories } from "@/app/components/navbar/Categories";
 import useLoginModal from "@/app/hooks/useLoginModal";
 import { Listing, Reservation, User } from "@prisma/client";
 import axios from "axios";
-import {
-  differenceInCalendarDays,
-  differenceInDays,
-  eachDayOfInterval,
-} from "date-fns";
+import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Range } from "react-date-range";
@@ -51,7 +47,6 @@ function ListingClient({
     return categories.find((item) => item.label === listing.category);
   }, [listing.category]);
 
-  const [isLoading, setIsLoading] = useState(false);
   const [totalPrice, setTotalPrice] = useState(listing.price);
   const [dateRange, setDateRange] = useState<Range>(initialDateRange);
 
@@ -59,7 +54,6 @@ function ListingClient({
     if (!currentUser) {
       return loginModal.onOpen();
     }
-    setIsLoading(true);
     axios
       .post("/api/reservations", {
         totalPrice,
@@ -72,12 +66,10 @@ function ListingClient({
         setDateRange(initialDateRange);
         router.push("/trips");
       })
-      .catch((e) => {
+      .catch(() => {
         toast.error("Something went wrong");
       })
-      .finally(() => {
-        setIsLoading(false);
-      });
+      .finally(() => {});
   }, [totalPrice, dateRange, listing.id, router, loginModal]);
 
   useEffect(() => {
