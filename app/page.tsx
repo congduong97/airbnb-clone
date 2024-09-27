@@ -39,3 +39,4 @@ export default async function Home({
     </ClientOnly>
   );
 }
+export const dynamic = "force-dynamic";

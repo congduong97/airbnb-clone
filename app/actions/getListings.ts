@@ -1,3 +1,5 @@
+import { isDynamicServerError } from "next/dist/client/components/hooks-server-context";
+
 export default async function getListings(params: {
   userId?: string;
   guestCount?: number;
@@ -67,6 +69,9 @@ export default async function getListings(params: {
     });
     return listings;
   } catch (error: any) {
+    if (isDynamicServerError(error)) {
+      throw error;
+    }
     throw new Error(error);
   }
 }
