@@ -1,3 +1,5 @@
+import prisma from "../libs/prismadb";
+
 interface IParams {
   listingId?: string;
 }

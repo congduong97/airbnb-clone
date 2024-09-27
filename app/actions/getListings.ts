@@ -1,4 +1,5 @@
 import { isDynamicServerError } from "next/dist/client/components/hooks-server-context";
+import prisma from "../libs/prismadb";
 
 export default async function getListings(params: {
   userId?: string;
